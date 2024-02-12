@@ -6,12 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import com.example.jetpackquotes.screens.QuoteDetail
 import com.example.jetpackquotes.screens.QuoteListScreen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        DataManager.readAssetsFromFile(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            DataManager.readAssetsFromFile(this)
+        }
 
         setContent {
             App()
